@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../api";
 import { Card, Button, Badge, Alert, Modal, ImageViewer } from "../components/ui";
 import { MONTHS } from "../constants";
-import { 
-  ArrowLeftIcon, 
-  CheckCircleIcon, 
-  ClockIcon, 
-  ChartBarIcon 
-} from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, CheckCircleIcon, ClockIcon, ChartBarIcon } from "@heroicons/react/24/solid";
 
 function PelangganStatus() {
   const navigate = useNavigate();
@@ -180,9 +175,7 @@ function PelangganStatus() {
               onClick={() => setActiveTab("belum")}
               className={`
                 py-3 sm:py-4 px-4 sm:px-6 border-b-3 font-semibold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 flex items-center whitespace-nowrap
-                ${activeTab === "belum" 
-                  ? "border-yellow-600 text-yellow-700 bg-yellow-50/50" 
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50"}
+                ${activeTab === "belum" ? "border-yellow-600 text-yellow-700 bg-yellow-50/50" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50"}
               `}
             >
               <ClockIcon className="w-5 h-5 sm:w-6 sm:h-6 mr-1 sm:mr-2" />
@@ -196,9 +189,7 @@ function PelangganStatus() {
               onClick={() => setActiveTab("sudah")}
               className={`
                 py-3 sm:py-4 px-4 sm:px-6 border-b-3 font-semibold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 flex items-center whitespace-nowrap
-                ${activeTab === "sudah" 
-                  ? "border-green-600 text-green-700 bg-green-50/50" 
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50"}
+                ${activeTab === "sudah" ? "border-green-600 text-green-700 bg-green-50/50" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50"}
               `}
             >
               <CheckCircleIcon className="w-5 h-5 sm:w-6 sm:h-6 mr-1 sm:mr-2" />
@@ -289,11 +280,7 @@ function PelangganStatus() {
               {/* Mobile Card View */}
               <div className="block md:hidden space-y-3">
                 {data.sudah_dicatat.map((p) => (
-                  <div 
-                    key={p.id} 
-                    className="bg-green-50 border border-green-200 rounded-lg p-4 hover:bg-green-100 transition-colors cursor-pointer"
-                    onClick={() => handlePelangganClick(p)}
-                  >
+                  <div key={p.id} className="bg-green-50 border border-green-200 rounded-lg p-4 hover:bg-green-100 transition-colors cursor-pointer" onClick={() => handlePelangganClick(p)}>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <span className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">#{p.id}</span>
@@ -348,10 +335,7 @@ function PelangganStatus() {
                           <Badge variant="success">Selesai</Badge>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <button
-                            onClick={() => handlePelangganClick(p)}
-                            className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center"
-                          >
+                          <button onClick={() => handlePelangganClick(p)} className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
                             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -370,12 +354,7 @@ function PelangganStatus() {
       </Card>
 
       {/* Modal Riwayat Pemakaian */}
-      <Modal
-        isOpen={selectedPelanggan !== null}
-        onClose={closeModal}
-        title={`Riwayat Pemakaian - ${selectedPelanggan?.nama}`}
-        size="xl"
-      >
+      <Modal isOpen={selectedPelanggan !== null} onClose={closeModal} title={`Riwayat Pemakaian - ${selectedPelanggan?.nama}`} size="xl">
         {loadingRiwayat ? (
           <div className="flex items-center justify-center py-8">
             <div className="text-center">
@@ -419,9 +398,7 @@ function PelangganStatus() {
                   {/* Header Periode */}
                   <div className="flex items-center justify-between mb-3 pb-3 border-b border-gray-200">
                     <div className="flex items-center gap-2">
-                      <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
-                        {index + 1}
-                      </div>
+                      <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">{index + 1}</div>
                       <div>
                         <h4 className="font-semibold text-gray-900">
                           {MONTHS[item.periode_bulan - 1]} {item.periode_tahun}
@@ -429,7 +406,9 @@ function PelangganStatus() {
                         <p className="text-xs text-gray-500">Dicatat oleh: {item.petugas || "N/A"}</p>
                       </div>
                     </div>
-                    <Badge variant="info" size="sm">{item.pemakaian_kubik} m³</Badge>
+                    <Badge variant="info" size="sm">
+                      {item.pemakaian_kubik} m³
+                    </Badge>
                   </div>
 
                   {/* Detail Pemakaian */}
@@ -454,7 +433,9 @@ function PelangganStatus() {
                       <p className="text-xs text-gray-500 mb-2">Masalah:</p>
                       <div className="flex flex-wrap gap-2">
                         {item.masalah.map((m, idx) => (
-                          <Badge key={idx} variant="warning" size="sm">{m}</Badge>
+                          <Badge key={idx} variant="warning" size="sm">
+                            {m}
+                          </Badge>
                         ))}
                       </div>
                     </div>
@@ -513,13 +494,7 @@ function PelangganStatus() {
       </Modal>
 
       {/* Image Viewer */}
-      {imageViewerOpen && (
-        <ImageViewer
-          images={imageViewerData}
-          initialIndex={imageViewerIndex}
-          onClose={closeImageViewer}
-        />
-      )}
+      {imageViewerOpen && <ImageViewer images={imageViewerData} initialIndex={imageViewerIndex} onClose={closeImageViewer} />}
     </div>
   );
 }
