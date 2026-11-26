@@ -1,38 +1,38 @@
-# Sistem Pencatatan Meter Air - Tirta Musi
+# Water Meter Recording System - Tirta Musi
 
-Aplikasi web untuk pencatatan pembacaan meter air menggunakan teknologi OCR (Optical Character Recognition) dan QR Code scanner.
+A web app for recording water meter readings. It uses OCR (Optical Character Recognition) to read meter serial numbers and a QR code scanner to identify customers.
 
-## 📋 Fitur
+## Features
 
-- **Autentikasi**: Login dan registrasi petugas pencatat
-- **Scan QR Code**: Identifikasi pelanggan melalui QR code
-- **OCR Seri Meter**: Baca nomor seri meter menggunakan kamera
-- **Input Pemakaian**: Catat meter awal, akhir, dan pemakaian kubik
-- **Riwayat 3 Bulan**: Lihat riwayat pemakaian 3 bulan terakhir
-- **Rata-rata Otomatis**: Hitung meter akhir berdasarkan rata-rata 3 bulan
-- **Status Pelanggan**: Monitor pelanggan yang sudah/belum dicatat per bulan
-- **Upload Foto**: Simpan foto meteran dan rumah
+- Login and registration for meter readers
+- Customer identification by QR code
+- Meter serial number reading with the camera (OCR)
+- Recording of start reading, end reading, and usage in cubic meters
+- Usage history for the last 3 months
+- End reading estimated from the 3-month average
+- Per-month status of which customers have and have not been recorded
+- Upload of meter and house photos
 
-## 🛠️ Teknologi
+## Tech stack
 
 ### Backend
 
 - Flask (Python web framework)
-- MySQL + PyMySQL (Database)
+- MySQL + PyMySQL (database)
 - SQLAlchemy (ORM)
 - OpenCV + Pytesseract (OCR)
-- Flask-CORS (Cross-origin support)
+- Flask-CORS (cross-origin support)
 
 ### Frontend
 
 - React + Vite
-- React Router (Navigation)
+- React Router (navigation)
 - Axios (HTTP client)
 - html5-qrcode (QR scanner)
-- react-easy-crop (Image cropping)
-- Tesseract.js (OCR di browser)
+- react-easy-crop (image cropping)
+- Tesseract.js (in-browser OCR)
 
-## 📁 Struktur Proyek
+## Project structure
 
 ```
 sistem-pencatatan-meter/
@@ -119,33 +119,33 @@ sistem-pencatatan-meter/
 └── .gitignore               # Root git ignore rules
 ```
 
-## 🚀 Setup & Instalasi
+## Setup and installation
 
 ### Prerequisites
 
-1. **Python 3.8+**
-2. **Node.js 16+** dan npm
-3. **MySQL Server**
-4. **Tesseract OCR** (untuk backend OCR)
-   - Windows: Download dari [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
+1. Python 3.8+
+2. Node.js 16+ and npm
+3. MySQL Server
+4. Tesseract OCR (for backend OCR)
+   - Windows: download from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
    - Linux: `sudo apt-get install tesseract-ocr`
    - Mac: `brew install tesseract`
 
-### Backend Setup
+### Backend setup
 
-1. **Clone repository dan masuk ke folder Backend**
+1. Clone the repository and go to the Backend folder:
 
    ```bash
    cd Backend
    ```
 
-2. **Buat virtual environment**
+2. Create a virtual environment:
 
    ```bash
    python -m venv venv
    ```
 
-3. **Aktifkan virtual environment**
+3. Activate the virtual environment:
    - Windows:
      ```bash
      venv\Scripts\activate
@@ -155,25 +155,25 @@ sistem-pencatatan-meter/
      source venv/bin/activate
      ```
 
-4. **Install dependencies**
+4. Install dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-5. **Setup database MySQL**
+5. Create the MySQL database:
 
    ```sql
    CREATE DATABASE meter_tirta_musi;
    ```
 
-6. **Konfigurasi environment variables**
+6. Configure environment variables:
 
    ```bash
    cp .env.example .env
    ```
 
-   Edit file `.env` sesuai kebutuhan:
+   Edit `.env` as needed:
 
    ```env
    SECRET_KEY=your-secret-key-here
@@ -182,55 +182,55 @@ sistem-pencatatan-meter/
    DB_HOST=localhost
    DB_NAME=meter_tirta_musi
 
-   # Jika Tesseract tidak di PATH, set manual:
+   # If Tesseract is not on PATH, set it manually:
    # TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe
    ```
 
-7. **Jalankan aplikasi**
+7. Run the app:
 
    ```bash
    python app.py
    ```
 
-   Backend akan berjalan di `http://localhost:5000`
+   The backend runs at `http://localhost:5000`.
 
-### Frontend Setup
+### Frontend setup
 
-1. **Masuk ke folder Frontend**
+1. Go to the Frontend folder:
 
    ```bash
    cd Frontend
    ```
 
-2. **Install dependencies**
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-3. **Konfigurasi environment variables**
+3. Configure environment variables:
 
    ```bash
    cp .env.example .env
    ```
 
-   Edit file `.env`:
+   Edit `.env`:
 
    ```env
    VITE_API_BASE=http://localhost:5000
    ```
 
-4. **Jalankan aplikasi**
+4. Run the app:
 
    ```bash
    npm run dev
    ```
 
-   Frontend akan berjalan di `http://localhost:5173`
+   The frontend runs at `http://localhost:5173`.
 
-## 📊 Database Schema
+## Database schema
 
-### Tabel: `pelanggan`
+### Table: `pelanggan` (customers)
 
 - `id` (INT, PK)
 - `nomor_seri_meter` (VARCHAR, UNIQUE)
@@ -238,7 +238,7 @@ sistem-pencatatan-meter/
 - `alamat` (TEXT)
 - `golongan` (VARCHAR)
 
-### Tabel: `pemakaian_meter`
+### Table: `pemakaian_meter` (meter usage)
 
 - `id` (INT, PK)
 - `pelanggan_id` (INT, FK)
@@ -255,7 +255,7 @@ sistem-pencatatan-meter/
 - `keterangan` (TEXT)
 - UNIQUE: `pelanggan_id`, `periode_bulan`, `periode_tahun`
 
-### Tabel: `pencatat_meter`
+### Table: `pencatat_meter` (meter readers)
 
 - `id` (INT, PK)
 - `username` (VARCHAR, UNIQUE)
@@ -264,100 +264,97 @@ sistem-pencatatan-meter/
 - `created_at` (DATETIME)
 - `updated_at` (DATETIME)
 
-## 🔑 API Endpoints
+## API endpoints
 
 ### Authentication
 
-- `POST /api/auth/signup` - Register petugas baru
-- `POST /api/auth/login` - Login petugas
-- `POST /api/auth/logout` - Logout
-- `GET /api/auth/me` - Get current user
+- `POST /api/auth/signup` - register a new meter reader
+- `POST /api/auth/login` - log in
+- `POST /api/auth/logout` - log out
+- `GET /api/auth/me` - get the current user
 
-### Pelanggan
+### Customers
 
-- `GET /api/pelanggan/id/:id` - Get pelanggan by ID
-- `GET /api/pelanggan/seri/:nomor_seri` - Get pelanggan by nomor seri
+- `GET /api/pelanggan/id/:id` - get a customer by ID
+- `GET /api/pelanggan/seri/:nomor_seri` - get a customer by meter serial number
 
-### Pemakaian
+### Usage
 
-- `POST /api/pemakaian` - Tambah pemakaian baru
-- `GET /api/pemakaian/:pelanggan_id/last-3` - Get 3 bulan terakhir
-- `GET /api/pemakaian/:pelanggan_id/avg-3` - Get rata-rata 3 bulan
-- `GET /api/pemakaian/status-bulan-ini` - Status pencatatan bulan ini
+- `POST /api/pemakaian` - add a usage record
+- `GET /api/pemakaian/:pelanggan_id/last-3` - get the last 3 months
+- `GET /api/pemakaian/:pelanggan_id/avg-3` - get the 3-month average
+- `GET /api/pemakaian/status-bulan-ini` - recording status for the current month
 
 ### OCR
 
-- `POST /api/seri-meter` - Scan nomor seri meter dari foto
+- `POST /api/seri-meter` - read the meter serial number from a photo
 
-### Static Files
+### Static files
 
-- `GET /uploads/:filename` - Serve uploaded images
+- `GET /uploads/:filename` - serve uploaded images
 
-## 📱 Cara Penggunaan
+## Usage
 
-1. **Login** dengan akun petugas
-2. **Scan QR Code** atau input ID pelanggan untuk identifikasi
-3. **Scan Seri Meter** menggunakan kamera (atau input manual)
-4. **Input Data Pemakaian**:
-   - Isi meter awal dan akhir
-   - Atau gunakan fitur "Rata-rata 3 Bulan"
-   - Upload foto meteran dan rumah
-5. **Simpan** data pemakaian
-6. **Monitor** status pencatatan di menu "Status Pelanggan"
+1. Log in with a meter reader account.
+2. Scan the customer's QR code or enter the customer ID.
+3. Scan the meter serial number with the camera, or type it in.
+4. Enter the usage data:
+   - Fill in the start and end readings, or use the 3-month average.
+   - Upload the meter and house photos.
+5. Save the usage record.
+6. Check recording progress on the customer status page.
 
-## 🔧 Development
+## Development
 
-### Backend Development
+### Backend
 
 ```bash
 cd Backend
-source venv/bin/activate  # atau venv\Scripts\activate di Windows
+source venv/bin/activate  # or venv\Scripts\activate on Windows
 python app.py
 ```
 
-### Frontend Development
+### Frontend
 
 ```bash
 cd Frontend
 npm run dev
 ```
 
-### Build untuk Production
+### Production build
 
 ```bash
 cd Frontend
 npm run build
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-### Tesseract Error
+### Tesseract error
 
-Jika OCR tidak bekerja, pastikan:
+If OCR does not work, check that:
 
-1. Tesseract sudah terinstall
-2. Path Tesseract sudah benar di `.env` (jika diperlukan)
-3. Coba set manual: `TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe`
+1. Tesseract is installed.
+2. The Tesseract path in `.env` is correct (if you set one).
+3. Setting it manually helps: `TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe`
 
-### Database Connection Error
+### Database connection error
 
-1. Pastikan MySQL server berjalan
-2. Cek kredensial database di `.env`
-3. Pastikan database sudah dibuat
+1. Check that the MySQL server is running.
+2. Check the database credentials in `.env`.
+3. Check that the database exists.
 
-### CORS Error
+### CORS error
 
-1. Pastikan `CORS_ORIGINS` di backend `.env` sesuai dengan URL frontend
+1. Check that `CORS_ORIGINS` in the backend `.env` matches the frontend URL.
 2. Default: `http://localhost:5173,http://localhost:3000`
 
-## 📝 License
+## License
 
 Private project - Tirta Musi
 
-## 👥 Contributors
+## Contributors
 
 - Developer Team
 
----
-
-**Note**: Pastikan untuk mengubah `SECRET_KEY` dan credentials database di production!
+Change `SECRET_KEY` and the database credentials before deploying to production.
